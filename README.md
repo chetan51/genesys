@@ -7,32 +7,34 @@
 		- isTerminal
 		- left
 		- right
+		- setLeft(node)
+		- setRight(node)
 
 	Program
 		- root
 		- fitness
-		- run(assignments, maxTime=1000)
-			- Returns: assignments, or None if maxTime is reached
+		- run(assignments, maxOperations=1000, maxTime=1000)
+			- Returns: assignments, or None if maxOperations or maxTime is reached
 		- mate(program)
 			- Returns: program
-		- print
+		- toString()
 			- Returns: string
 
 	Population
 		- programs
 		- problem
-		- init(n, problem)
+		- init(size, problem)
 		- computeFitnesses()
 			- Returns: (min, max, average, standard deviation)
 		- killWeakest(n)
 		- mateStrongest(n)
 		- mutate()
-		- _createProgram(problem)
-			- Returns: program
 		- getBest()
 			- Returns: program
+		- _createProgram(problem) [static]
+			- Returns: program
 
-	Problem (all static)
+	AbstractProblem [all static]
 		- TERMINALS
 		- OPERATORS
 		- INPUTS
