@@ -5,13 +5,17 @@ from problems.fit_curve_problem import FitCurveProblem
 
 
 
+NUM_GENERATIONS = 100
+
+
+
 def run():
   population = Population(FitCurveProblem)
   size = population.size
 
-  for i in xrange(1, 101):
+  for i in xrange(1, NUM_GENERATIONS + 1):
     print "========================================="
-    print "Generation\t{0}".format(i)
+    print "Generation:\t{0}".format(i)
     print "========================================="
 
     stats = population.computeFitnesses()
