@@ -1,7 +1,7 @@
 class Population(object):
 
 
-  def __init__(self, size, problem):
+  def __init__(self, problem, size=100):
     self.size = size
     self.problem = problem
 

@@ -23,7 +23,7 @@
 	Population
 		- programs
 		- problem
-		- init(size, problem)
+		- init(problem, size=100)
 		- computeFitnesses()
 			- Returns: (min, max, average, standard deviation)
 		- killWeakest(n)
