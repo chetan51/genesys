@@ -1,5 +1,7 @@
 from classes.abstract_problem import AbstractProblem
 
+
+
 class FitCurveProblem(AbstractProblem):
 
   TERMINALS = []
@@ -8,6 +10,5 @@ class FitCurveProblem(AbstractProblem):
   OUTPUTS = []
 
 
-  @staticmethod
-  def computeFitness(program):
+  def computeFitness(self, program):
     raise NotImplementedError()

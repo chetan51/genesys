@@ -34,10 +34,11 @@
 		- _createProgram(problem) [static]
 			- Returns: program
 
-	AbstractProblem [all static]
-		- TERMINALS
-		- OPERATORS
-		- INPUTS
-		- OUTPUTS
+	AbstractProblem
+		- TERMINALS [static]
+		- OPERATORS [static]
+		- INPUTS [static]
+		- OUTPUTS [static]
+		- init(args)
 		- computeFitness(program)
 			- Returns: int
