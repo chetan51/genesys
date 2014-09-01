@@ -17,7 +17,8 @@ class Program(object):
 
 
   def toString(self):
-    return Program._toString(self.root)
+    return "{0} [{1} nodes]".format(Program._toString(self.root),
+                                    len(Program._traverseInOrder(self.root)))
 
 
   @staticmethod
@@ -60,13 +61,23 @@ class Program(object):
 
 
   @staticmethod
-  def _toString(node):
-    if node is None:
+  def _toString(root):
+    if root is None:
       return ""
 
-    if node.isTerminal():
-      return node.value
+    if root.isTerminal():
+      return root.value
 
-    return "({0} {1} {2})".format(node.value,
-                                  Program._toString(node.left),
-                                  Program._toString(node.right))
+    return "({0} {1} {2})".format(root.value,
+                                  Program._toString(root.left),
+                                  Program._toString(root.right))
+
+
+  @staticmethod
+  def _traverseInOrder(root):
+    if root is None:
+      return []
+
+    return ([root] +
+            Program._traverseInOrder(root.left) +
+            Program._traverseInOrder(root.right))
