@@ -10,11 +10,11 @@ class Population(object):
     raise NotImplementedError()
 
 
-  def killWeakest(self, n):
+  def killWeakest(self, n, fitnesses):
     raise NotImplementedError()
 
 
-  def mateStrongest(self, n):
+  def mateStrongest(self, n, fitnesses):
     raise NotImplementedError()
 
 
@@ -22,7 +22,7 @@ class Population(object):
     raise NotImplementedError()
 
 
-  def getBest(self):
+  def getBest(self, fitnesses):
     raise NotImplementedError()
 
 

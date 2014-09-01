@@ -12,7 +12,6 @@
 
 	Program
 		- root
-		- fitness
 		- run(assignments, maxOperations=1000, maxTime=1000)
 			- Returns: assignments, or None if maxOperations or maxTime is reached
 		- mate(program)
@@ -25,14 +24,16 @@
 		- problem
 		- init(problem, size=100)
 		- computeFitnesses()
-			- Returns: (min, max, average, standard deviation)
-		- killWeakest(n)
-		- mateStrongest(n)
+			- Returns: fitnesses (dict)
+		- killWeakest(n, fitnesses)
+		- mateStrongest(n, fitnesses)
 		- mutate()
-		- getBest()
+		- getBest(fitnesses)
 			- Returns: program
 		- _createProgram(problem) [static]
 			- Returns: program
+		- fitnessStats(fitnesses)
+			- Returns: (min, max, average, standard deviation)
 
 	AbstractProblem
 		- TERMINALS [static]
