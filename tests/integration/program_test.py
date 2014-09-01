@@ -24,6 +24,18 @@ class ProgramTest(unittest.TestCase):
     self.assertEqual(result["y"], 7)
 
 
+  def testRunSelfReferencingVariable(self):
+    root = Node("=")
+    root.left = Node("y")
+    root.right = Node("+")
+    root.right.left = Node("y")
+    root.right.right = Node("3")
+
+    program = Program(root)
+    result = program.run({"y": 2})
+
+    self.assertEqual(result["y"], 5)
+
 
 if __name__ == "__main__":
   unittest.main()
