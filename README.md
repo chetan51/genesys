@@ -36,10 +36,10 @@
 			- Returns: (min, max, average, standard deviation)
 
 	AbstractProblem
-		- TERMINALS [static]
-		- OPERATORS [static]
 		- INPUTS [static]
 		- OUTPUTS [static]
+		- OPERATORS [static]
+		- CONSTANTS [static]
 		- init(args)
 		- computeFitness(program)
 			- Returns: int
