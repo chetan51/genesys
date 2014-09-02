@@ -41,8 +41,8 @@ class ProgramTest(unittest.TestCase):
     programA = ProgramTest._createProgram()
     programB = programA.copy()
 
-    nodesA = Program.traverseInOrder(programA.root)
-    nodesB = Program.traverseInOrder(programB.root)
+    nodesA = programA.traverseNodesInOrder()
+    nodesB = programB.traverseNodesInOrder()
 
     self.assertEqual(len(nodesA), len(nodesB))
 

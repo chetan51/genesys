@@ -24,19 +24,13 @@ class Program(object):
     return Program(root)
 
 
+  def traverseNodesInOrder(self):
+    return Program._traverseInOrder(self.root)
+
+
   def toString(self):
     return "{0} [{1} nodes]".format(Program._toString(self.root),
                                     len(Program.traverseInOrder(self.root)))
-
-
-  @staticmethod
-  def traverseInOrder(root):
-    if root is None:
-      return []
-
-    return ([root] +
-            Program.traverseInOrder(root.left) +
-            Program.traverseInOrder(root.right))
 
 
   @staticmethod
@@ -88,6 +82,16 @@ class Program(object):
     newNode.right = Program._copyNode(node.right)
 
     return newNode
+
+
+  @staticmethod
+  def _traverseInOrder(root):
+    if root is None:
+      return []
+
+    return ([root] +
+            Program._traverseInOrder(root.left) +
+            Program._traverseInOrder(root.right))
 
 
   @staticmethod
