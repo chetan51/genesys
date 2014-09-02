@@ -30,6 +30,75 @@ class Node(object):
     return False
 
 
-  def toString(self):
-    return self.value
+  @staticmethod
+  def evaluate(node, results):
+    if node == None:
+      return None
 
+    if node.isTerminal():
+      return Node.evaluatedValue(node, results)
+
+    if node.value == "=":
+      right = Node.evaluate(node.right, results)
+      if node.left.isVariable() and right is not None:
+        results[node.left.value] = right
+      return None
+
+    left = Node.evaluate(node.left, results)
+    right = Node.evaluate(node.right, results)
+
+    if node.value == "+":
+      return left + right
+
+    if node.value == "-":
+      return left - right
+
+    if node.value == "*":
+      return left * right
+
+    if node.value == "/":
+      return left / right
+
+
+  @staticmethod
+  def evaluatedValue(node, results):
+    value = node.value
+    if node.isVariable():
+      value = results[node.value]
+
+    return float(value)
+
+
+  @staticmethod
+  def copy(node):
+    if node is None:
+      return None
+
+    newNode = Node(node.value)
+    newNode.left = Node.copy(node.left)
+    newNode.right = Node.copy(node.right)
+
+    return newNode
+
+
+  @staticmethod
+  def traverseInOrder(node):
+    if node is None:
+      return []
+
+    return ([node] +
+            Node.traverseInOrder(node.left) +
+            Node.traverseInOrder(node.right))
+
+
+  @staticmethod
+  def toString(node):
+    if node is None:
+      return ""
+
+    if node.isTerminal():
+      return node.value
+
+    return "({0} {1} {2})".format(node.value,
+                                  Node.toString(node.left),
+                                  Node.toString(node.right))
