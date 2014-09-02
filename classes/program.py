@@ -1,3 +1,7 @@
+from classes.node import Node
+
+
+
 class Program(object):
 
 
@@ -15,9 +19,24 @@ class Program(object):
     raise NotImplementedError()
 
 
+  def copy(self):
+    root = Program._copyNode(self.root)
+    return Program(root)
+
+
   def toString(self):
     return "{0} [{1} nodes]".format(Program._toString(self.root),
-                                    len(Program._traverseInOrder(self.root)))
+                                    len(Program.traverseInOrder(self.root)))
+
+
+  @staticmethod
+  def traverseInOrder(root):
+    if root is None:
+      return []
+
+    return ([root] +
+            Program.traverseInOrder(root.left) +
+            Program.traverseInOrder(root.right))
 
 
   @staticmethod
@@ -60,6 +79,18 @@ class Program(object):
 
 
   @staticmethod
+  def _copyNode(node):
+    if node is None:
+      return None
+
+    newNode = Node(node.value)
+    newNode.left = Program._copyNode(node.left)
+    newNode.right = Program._copyNode(node.right)
+
+    return newNode
+
+
+  @staticmethod
   def _toString(root):
     if root is None:
       return ""
@@ -70,13 +101,3 @@ class Program(object):
     return "({0} {1} {2})".format(root.value,
                                   Program._toString(root.left),
                                   Program._toString(root.right))
-
-
-  @staticmethod
-  def _traverseInOrder(root):
-    if root is None:
-      return []
-
-    return ([root] +
-            Program._traverseInOrder(root.left) +
-            Program._traverseInOrder(root.right))

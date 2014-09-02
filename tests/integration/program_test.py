@@ -37,5 +37,30 @@ class ProgramTest(unittest.TestCase):
     self.assertEqual(result["y"], 5)
 
 
+  def testCopy(self):
+    programA = ProgramTest._createProgram()
+    programB = programA.copy()
+
+    nodesA = Program.traverseInOrder(programA.root)
+    nodesB = Program.traverseInOrder(programB.root)
+
+    self.assertEqual(len(nodesA), len(nodesB))
+
+    for i in xrange(len(nodesA)):
+      self.assertFalse(nodesA[i] is nodesB[i])
+      self.assertEqual(nodesA[i].value, nodesB[i].value)
+
+
+  @staticmethod
+  def _createProgram():
+    root = Node("=")
+    root.left = Node("y")
+    root.right = Node("+")
+    root.right.left = Node("y")
+    root.right.right = Node("3")
+
+    return Program(root)
+
+
 if __name__ == "__main__":
   unittest.main()
