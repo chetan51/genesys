@@ -24,10 +24,6 @@ class Program(object):
     return Program(root)
 
 
-  def traverseNodesInOrder(self):
-    return Node.traverseInOrder(self.root)
-
-
   def toString(self):
     return "{0} [{1} nodes]".format(Node.toString(self.root),
                                     len(Node.traverseInOrder(self.root)))

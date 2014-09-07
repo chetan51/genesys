@@ -41,14 +41,7 @@ class ProgramTest(unittest.TestCase):
     programA = ProgramTest._createProgram()
     programB = programA.copy()
 
-    nodesA = programA.traverseNodesInOrder()
-    nodesB = programB.traverseNodesInOrder()
-
-    self.assertEqual(len(nodesA), len(nodesB))
-
-    for i in xrange(len(nodesA)):
-      self.assertFalse(nodesA[i] is nodesB[i])
-      self.assertEqual(nodesA[i].value, nodesB[i].value)
+    self.assertEqual(programA.toString(), programB.toString())
 
 
   @staticmethod
