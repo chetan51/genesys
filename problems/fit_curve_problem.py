@@ -31,4 +31,4 @@ class FitCurveProblem(AbstractProblem):
 
   @staticmethod
   def _fn(x):
-    return x + 4
+    return x * x
