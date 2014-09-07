@@ -10,7 +10,7 @@ class Population(object):
 
   GROWTH_FACTOR_SCALE = 0.5
   MAX_PROGRAM_DEPTH = 10
-  MUTATION_PROBABILITY = 0.001
+  MUTATION_PROBABILITY = 0.01
 
 
   def __init__(self, problem, size=100):
