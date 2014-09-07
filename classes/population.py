@@ -10,6 +10,7 @@ class Population(object):
 
   GROWTH_FACTOR_SCALE = 0.5
   MAX_PROGRAM_DEPTH = 10
+  MUTATION_PROBABILITY = 0.001
 
 
   def __init__(self, problem, size=100):
@@ -46,8 +47,13 @@ class Population(object):
 
 
   def mutate(self):
-    # TODO: implement
-    pass
+    for program in self.programs:
+      for node in Node.traverseInOrder(program.root):
+        if random.random() < self.MUTATION_PROBABILITY:
+          if node.isTerminal():
+            node.value = self._createTerminalNode(self.problem).value
+          else:
+            node.value = self._createOperatorNode(self.problem).value
 
 
   def sortProgramsByFitness(self, fitnesses):
