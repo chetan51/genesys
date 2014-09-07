@@ -1,3 +1,5 @@
+import random
+
 from classes.node import Node
 
 
@@ -16,12 +18,16 @@ class Program(object):
 
 
   def mate(self, program):
-    raise NotImplementedError()
+    childA = Node.copy(self.root)
+    childB = Node.copy(program.root)
 
+    nodeA = random.choice(Node.traverseInOrder(childA))
+    nodeB = random.choice(Node.traverseInOrder(childB))
 
-  def copy(self):
-    root = Node.copy(self.root)
-    return Program(root)
+    childA = Node.replace(childA, nodeA, nodeB)
+    childB = Node.replace(childB, nodeB, nodeA)
+
+    return [Program(childA), Program(childB)]
 
 
   def toString(self):

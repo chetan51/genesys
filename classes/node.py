@@ -82,6 +82,19 @@ class Node(object):
 
 
   @staticmethod
+  def replace(node, target, value):
+    if node is target:
+      return value
+
+    if node.left is target:
+      node.left = value
+    if node.right is target:
+      node.right = value
+
+    return node
+
+
+  @staticmethod
   def traverseInOrder(node):
     if node is None:
       return []

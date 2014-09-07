@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+import random
 import unittest
 
 from classes.node import Node
@@ -8,6 +9,10 @@ from classes.program import Program
 
 
 class ProgramTest(unittest.TestCase):
+
+
+  def setUp(self):
+    random.seed(42)
 
 
   def testRun(self):
@@ -37,11 +42,13 @@ class ProgramTest(unittest.TestCase):
     self.assertEqual(result["y"], 5)
 
 
-  def testCopy(self):
+  def testMate(self):
     programA = ProgramTest._createProgram()
-    programB = programA.copy()
+    programB = ProgramTest._createProgram()
 
-    self.assertEqual(programA.toString(), programB.toString())
+    children = programA.mate(programB)
+    self.assertEqual(len(children), 2)
+    self.assertNotEqual(children[0].toString(), children[1].toString())
 
 
   @staticmethod
