@@ -28,11 +28,11 @@
 		- killWeakest(n, fitnesses)
 		- mateStrongest(n, fitnesses)
 		- mutate()
-		- getBest(fitnesses)
+		- sortProgramsByFitness(fitnesses)
 			- Returns: program
 		- _createProgram(problem) [static]
 			- Returns: program
-		- fitnessStats(fitnesses)
+		- computeFitnessStats(fitnesses)
 			- Returns: (min, max, average, standard deviation)
 
 	AbstractProblem

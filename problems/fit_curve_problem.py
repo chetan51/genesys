@@ -12,11 +12,17 @@ class FitCurveProblem(AbstractProblem):
   CONSTANTS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 
-  def computeFitness(self, program):
+  @staticmethod
+  def computeFitness(program):
     cost = 0.00001
 
     for x in xrange(50):
       results = program.run({"x": x})
+
+      if "y" not in results:
+        cost += 10000
+        continue
+
       y = results["y"]
       cost += abs(y - FitCurveProblem._fn(x))
 

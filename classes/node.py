@@ -32,7 +32,7 @@ class Node(object):
 
   @staticmethod
   def evaluate(node, results):
-    if node == None:
+    if node is None:
       return None
 
     if node.isTerminal():
@@ -40,12 +40,17 @@ class Node(object):
 
     if node.value == "=":
       right = Node.evaluate(node.right, results)
-      if node.left.isVariable() and right is not None:
+      if (node.left is not None and
+          node.left.isVariable() and
+          right is not None):
         results[node.left.value] = right
       return None
 
     left = Node.evaluate(node.left, results)
     right = Node.evaluate(node.right, results)
+
+    if left is None or right is None:
+      return None
 
     if node.value == "+":
       return left + right
@@ -57,13 +62,18 @@ class Node(object):
       return left * right
 
     if node.value == "/":
+      if right == 0:
+        return None
       return left / right
 
 
   @staticmethod
   def evaluatedValue(node, results):
     value = node.value
+
     if node.isVariable():
+      if node.value not in results:
+        return None
       value = results[node.value]
 
     return float(value)

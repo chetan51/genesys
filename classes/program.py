@@ -13,7 +13,13 @@ class Program(object):
 
   def run(self, assignments, maxOperations=1000, maxTime=1000):
     results = dict(assignments)
-    Node.evaluate(self.root, results)
+
+    try:
+      Node.evaluate(self.root, results)
+    except Exception as e:
+      print "Error evaluating program: {0}".format(self.toString())
+      raise e
+
     return results
 
 

@@ -11,5 +11,6 @@ class AbstractProblem(object):
     self.args = args
 
 
-  def computeFitness(self, program):
+  @staticmethod
+  def computeFitness(program):
     raise NotImplementedError()

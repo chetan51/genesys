@@ -1,3 +1,4 @@
+import numpy
 import random
 
 from classes.node import Node
@@ -12,36 +13,67 @@ class Population(object):
 
 
   def __init__(self, problem, size=100):
-    self.size = size
     self.problem = problem
     self.programs = []
 
-    self._createPrograms()
+    self._createPrograms(size)
+
+
+  def size(self):
+    return len(self.programs)
 
 
   def computeFitnesses(self):
-    raise NotImplementedError()
+    fitnesses = dict()
+
+    for program in self.programs:
+      fitnesses[program] = self.problem.computeFitness(program)
+
+    return fitnesses
 
 
   def killWeakest(self, n, fitnesses):
-    raise NotImplementedError()
+    sortedPrograms = self.sortProgramsByFitness(fitnesses)
+    keep = max(0, self.size() - n)
+    self.programs = sortedPrograms[0:keep]
 
 
   def mateStrongest(self, n, fitnesses):
-    raise NotImplementedError()
+    sortedPrograms = self.sortProgramsByFitness(fitnesses)
+    for i in xrange(0, n/2):
+      children = sortedPrograms[i].mate(sortedPrograms[i+1])
+      self.programs += children
 
 
   def mutate(self):
-    raise NotImplementedError()
+    # TODO: implement
+    pass
 
 
-  def getBest(self, fitnesses):
-    raise NotImplementedError()
+  def sortProgramsByFitness(self, fitnesses):
+    def breakTiesRandomly(a, b):
+      diff = cmp(a, b)
+      return diff if diff else random.choice([-1, 1])
+
+    sortedFitnesses = sorted(fitnesses.iteritems(),
+                             key=lambda (k, v): v,
+                             cmp=breakTiesRandomly,
+                             reverse=True)
+    sortedPrograms = [k for (k, v) in sortedFitnesses]
+    return sortedPrograms
 
 
-  def _createPrograms(self):
-    for i in xrange(self.size):
-      growthFactor = (float(i) / self.size) * Population.GROWTH_FACTOR_SCALE
+  def computeFitnessStats(self, fitnesses):
+    """
+		@return (tuple) stats (min, max, average, standard deviation)
+		"""
+    scores = numpy.array(fitnesses.values())
+    return (scores.min(), scores.max(), scores.mean(), scores.std())
+
+
+  def _createPrograms(self, size):
+    for i in xrange(size):
+      growthFactor = (float(i) / size) * Population.GROWTH_FACTOR_SCALE
       self.programs.append(Population._createProgram(self.problem, growthFactor))
 
 

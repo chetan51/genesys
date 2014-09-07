@@ -19,9 +19,8 @@ class FitCurveProblemTest(unittest.TestCase):
     root.right.right = Node("4")
 
     program = Program(root)
-    problem = FitCurveProblem()
 
-    fitness = problem.computeFitness(program)
+    fitness = FitCurveProblem.computeFitness(program)
     self.assertEqual(fitness, 100)
 
 
@@ -31,10 +30,20 @@ class FitCurveProblemTest(unittest.TestCase):
     root.right = Node("4")
 
     program = Program(root)
-    problem = FitCurveProblem()
 
-    fitness = problem.computeFitness(program)
+    fitness = FitCurveProblem.computeFitness(program)
     self.assertEqual(fitness, 8.14518041038435)
+
+
+  def testComputeFitnessDOA(self):
+    root = Node("=")
+    root.left = Node("x")
+    root.right = Node("4")
+
+    program = Program(root)
+
+    fitness = FitCurveProblem.computeFitness(program)
+    self.assertEqual(fitness, 0.019999999732933336)
 
 
 if __name__ == "__main__":
