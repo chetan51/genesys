@@ -20,16 +20,10 @@ def run():
 
     fitnesses = population.computeFitnesses()
     stats = population.computeFitnessStats(fitnesses)
-    print "-----------------------------------------"
-    print "Stats:"
-    print "-----------------------------------------"
-    print stats
+    print "Stats: {0}".format(stats)
 
     best = population.sortProgramsByFitness(fitnesses)[0]
-    print "-----------------------------------------"
-    print "Best:"
-    print "-----------------------------------------"
-    print best.toString()
+    print "Best: {0}".format(best.toString())
 
     population.killWeakest(size / 2, fitnesses)
     population.mateStrongest(size / 2, fitnesses)
